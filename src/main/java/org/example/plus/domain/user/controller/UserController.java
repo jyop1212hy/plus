@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.plus.common.utils.JwtUtil;
 import org.example.plus.domain.user.model.dto.UserDto;
 import org.example.plus.domain.user.model.request.UpdateUserEmailRequest;
+import org.example.plus.domain.user.model.request.UserSearchRequest;
+import org.example.plus.domain.user.model.response.UserSearchResponse;
 import org.example.plus.domain.user.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -18,6 +20,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
@@ -102,6 +106,12 @@ public class UserController {
     public ResponseEntity<String> deleteUserByJpql(@PathVariable String username) {
         userService.deleteUserByJpql(username);
         return ResponseEntity.ok("삭제완료");
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<UserSearchResponse>> searchUserLists(
+            UserSearchRequest request) {
+
     }
 
 }
