@@ -31,7 +31,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
 
     //QueryDSL 설정
-    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
+    implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta' //인젝션 문제(외부에서 쿼리문 조작으로 데이터 유출 가능)
     annotationProcessor "com.querydsl:querydsl-apt:5.0.0:jakarta"
     annotationProcessor "jakarta.annotation:jakarta.annotation-api"
     annotationProcessor "jakarta.persistence:jakarta.persistence-api"

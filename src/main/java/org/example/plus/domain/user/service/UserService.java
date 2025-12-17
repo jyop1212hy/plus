@@ -10,6 +10,8 @@ import org.example.plus.domain.user.model.request.LoginRequest;
 import org.example.plus.domain.user.model.request.UserSearchRequest;
 import org.example.plus.domain.user.model.response.UserSearchResponse;
 import org.example.plus.domain.user.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +25,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-
-
-    public User save(User user) {
-        return userRepository.save(user);
-    }
 
     public String login(LoginRequest request) {
 
@@ -92,8 +89,12 @@ public class UserService {
     }
 
     @Transactional
-    public List<UserSearchResponse>searchUserList(UserSearchRequest request){
-
+    public List<UserSearchResponse> searchUserList(UserSearchRequest request){
+        return userRepository.searchUserByMultiConditionV2(request);
     }
 
+    @Transactional
+    public Page<UserSearchResponse> searchUserPage(UserSearchRequest request, Pageable pageable) {
+        return userRepository.searchUserByMultiConditionPage(request, pageable);
+    }
 }
